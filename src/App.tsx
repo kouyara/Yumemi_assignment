@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react'
+import Highcharts from 'highcharts'
+import HighchartsReact from 'highcharts-react-official'
 import './App.css'
 
 interface Prefecture {
@@ -16,13 +18,24 @@ interface PopulationComposition {
   data: PopulationData[];
 }
 
+interface PrefecturePopulation {
+  prefCode: number;
+  prefName: string;
+  data: PopulationComposition[];
+}
+
+type PopulationType = '総人口' | '年少人口' | '生産年齢人口' | '老年人口';
+
 const API_KEY = import.meta.env.VITE_API_KEY;
 
 function App() {
   const [prefectures, setPrefectures] = useState<Prefecture[]>([])
-  const [selectedPrefecture, setSelectedPrefecture] = useState<number | null>(null)
-  const [populationData, setPopulationData] = useState<PopulationComposition[]>([])
+  const [selectedPrefectures, setSelectedPrefectures] = useState<number[]>([])
+  const [prefecturePopulations, setPrefecturePopulations] = useState<PrefecturePopulation[]>([])
+  const [selectedPopulationType, setSelectedPopulationType] = useState<PopulationType>('総人口')
   const [error, setError] = useState<string | null>(null)
+
+  const populationTypes: PopulationType[] = ['総人口', '年少人口', '生産年齢人口', '老年人口'];
 
   useEffect(() => {
     const fetchPrefectures = async () => {
@@ -64,19 +77,71 @@ function App() {
         }
 
         const data = await response.json();
-        setPopulationData(data.result.data);
+        const prefName = prefectures.find(p => p.prefCode === prefCode)?.prefName || '';
+        
+        setPrefecturePopulations(prev => {
+          const newData = [...prev];
+          const index = newData.findIndex(p => p.prefCode === prefCode);
+          if (index === -1) {
+            newData.push({
+              prefCode,
+              prefName,
+              data: data.result.data
+            });
+          }
+          return newData;
+        });
       } catch (err) {
         setError(err instanceof Error ? err.message : 'エラーが発生しました');
       }
     };
 
-    if (selectedPrefecture) {
-      fetchPopulationData(selectedPrefecture);
-    }
-  }, [selectedPrefecture]);
+    selectedPrefectures.forEach(prefCode => {
+      if (!prefecturePopulations.some(p => p.prefCode === prefCode)) {
+        fetchPopulationData(prefCode);
+      }
+    });
+  }, [selectedPrefectures, prefectures]);
 
-  const handlePrefectureClick = (prefCode: number) => {
-    setSelectedPrefecture(prefCode);
+  const handlePrefectureChange = (prefCode: number) => {
+    setSelectedPrefectures(prev => {
+      if (prev.includes(prefCode)) {
+        return prev.filter(code => code !== prefCode);
+      } else {
+        return [...prev, prefCode];
+      }
+    });
+  };
+
+  const getChartOptions = () => {
+    const years = prefecturePopulations[0]?.data[0]?.data.map(item => item.year) || [];
+
+    return {
+      title: {
+        text: `${selectedPopulationType}の推移`
+      },
+      xAxis: {
+        title: {
+          text: '年'
+        },
+        categories: years
+      },
+      yAxis: {
+        title: {
+          text: '人口'
+        }
+      },
+      series: prefecturePopulations.map(prefecture => {
+        const populationData = prefecture.data.find(d => d.label === selectedPopulationType);
+        return {
+          name: prefecture.prefName,
+          data: populationData?.data.map(item => item.value) || []
+        };
+      }),
+      tooltip: {
+        valueSuffix: '人'
+      }
+    };
   };
 
   return (
@@ -86,35 +151,46 @@ function App() {
         {prefectures.length > 0 && (
           <div>
             <h2>都道府県一覧</h2>
-            <ul>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))', gap: '10px' }}>
               {prefectures.map((prefecture) => (
-                <li 
-                  key={prefecture.prefCode}
-                  onClick={() => handlePrefectureClick(prefecture.prefCode)}
-                  style={{ cursor: 'pointer' }}
-                >
+                <label key={prefecture.prefCode} style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                  <input
+                    type="checkbox"
+                    checked={selectedPrefectures.includes(prefecture.prefCode)}
+                    onChange={() => handlePrefectureChange(prefecture.prefCode)}
+                  />
                   {prefecture.prefName}
-                </li>
+                </label>
               ))}
-            </ul>
+            </div>
           </div>
         )}
 
-        {selectedPrefecture && populationData.length > 0 && (
+        {selectedPrefectures.length > 0 && prefecturePopulations.length > 0 && (
           <div>
-            <h3>人口構成データ</h3>
-            {populationData.map((composition, index) => (
-              <div key={index}>
-                <h4>{composition.label}</h4>
-                <ul>
-                  {composition.data.map((item) => (
-                    <li key={item.year}>
-                      {item.year}年: {item.value.toLocaleString()}人
-                    </li>
-                  ))}
-                </ul>
+            <h3>人口推移グラフ</h3>
+            <div style={{ marginBottom: '20px' }}>
+              <div style={{ display: 'flex', gap: '20px', justifyContent: 'center' }}>
+                {populationTypes.map((type) => (
+                  <label key={type} style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                    <input
+                      type="radio"
+                      name="populationType"
+                      value={type}
+                      checked={selectedPopulationType === type}
+                      onChange={() => setSelectedPopulationType(type)}
+                    />
+                    {type}
+                  </label>
+                ))}
               </div>
-            ))}
+            </div>
+            <div style={{ width: '100%', maxWidth: '800px', margin: '0 auto' }}>
+              <HighchartsReact
+                highcharts={Highcharts}
+                options={getChartOptions()}
+              />
+            </div>
           </div>
         )}
       </div>
