@@ -146,6 +146,7 @@ function App() {
 
   return (
     <>
+      <h1>🧡 ゆめみ フロントエンドコーディング試験</h1>
       <div>
         {error && <p className="error">{error}</p>}
         {prefectures.length > 0 && (
