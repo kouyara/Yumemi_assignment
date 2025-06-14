@@ -1,0 +1,125 @@
+:root {
+    --green-100: #d0f3e1;
+    --green-200: #b1e7cb;
+    --green-300: #8cd9b3;
+    --green-400: #63c99a;
+    --green-500: #38b47f;
+    --green-600: #2fa26f;
+    --green-700: #268e5e;
+    --green-800: #1e7a4d;
+    --green-900: #135532;
+    --text-dark: #333;
+  }
+  
+  body {
+    margin: 0;
+    padding: 3rem 2rem;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    color: var(--text-dark);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1 {
+    text-align: center;
+    color: var(--green-900);
+    font-size: 2rem;
+    margin: 0 0 2rem;
+  }  
+  h2,
+  h3 {
+    text-align: center;
+    color: var(--green-800);
+    margin: 1.5rem 0 1rem;
+  }
+  
+  .error {
+    max-width: 600px;
+    margin: 1rem auto;
+    padding: 0.75rem 1.25rem;
+    background: #ffecec;
+    color: #c0392b;
+    border-radius: 8px;
+    font-weight: 600;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  }
+  
+  label {
+    cursor: pointer;
+    background: #fff;
+    border: 1px solid var(--green-100);
+    border-radius: 8px;
+    padding: 0.6rem 0.9rem;
+    transition: background 0.2s ease, box-shadow 0.2s ease;
+    user-select: none;
+  }
+  
+  label:hover {
+    background: var(--green-100);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+  
+  input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    background: #fff;
+    box-shadow: 0 0 0 2px var(--green-400);
+    display: grid;
+    place-content: center;
+    transition: background 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  input[type="checkbox"]:checked {
+    background: var(--green-600);
+    box-shadow: 0 0 0 2px var(--green-600);
+  }
+  
+  input[type="checkbox"]:checked::after {
+    content: "";
+    width: 6px;
+    height: 12px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+  
+  input[type="checkbox"]:focus-visible {
+    outline: 2px solid var(--green-700);
+    outline-offset: 2px;
+  }
+  
+  input[type="radio"] {
+    accent-color: var(--green-600);
+    width: 18px;
+    height: 18px;
+  }
+  
+  input[type="radio"]:focus-visible {
+    outline: 2px solid var(--green-600);
+    outline-offset: 2px;
+  }
+  
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+  }
+  
+  .highcharts-root text {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+  }
+  
+  .highcharts-title {
+    fill: var(--green-900);
+  }
+  
+  .highcharts-axis-title,
+  .highcharts-axis-labels {
+    fill: var(--green-700);
+  }
+  
+  .highcharts-legend-item text {
+    fill: var(--green-800);
+  }
+  
