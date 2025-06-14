@@ -18,12 +18,14 @@
     color: var(--text-dark);
     -webkit-font-smoothing: antialiased;
   }
+  
   h1 {
     text-align: center;
     color: var(--green-900);
     font-size: 2rem;
     margin: 0 0 2rem;
-  }  
+  }
+  
   h2,
   h3 {
     text-align: center;
@@ -43,6 +45,9 @@
   }
   
   label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
     cursor: pointer;
     background: #fff;
     border: 1px solid var(--green-100);
@@ -104,6 +109,19 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     gap: 10px;
+  }
+  
+  .type-selector {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .chart-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
   }
   
   .highcharts-root text {
