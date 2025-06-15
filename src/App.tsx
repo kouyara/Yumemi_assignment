@@ -79,6 +79,10 @@ function App() {
     selectedPrefectures.forEach(prefCode => {
       if (!prefecturePopulations.some(p => p.prefCode === prefCode)) fetchPopulationData(prefCode)
     })
+
+    setPrefecturePopulations(prev => 
+      prev.filter(pref => selectedPrefectures.includes(pref.prefCode))
+    )
   }, [selectedPrefectures, prefectures])
 
   const handlePrefectureChange = (prefCode: number) =>
