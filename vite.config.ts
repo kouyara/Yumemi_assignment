@@ -5,16 +5,6 @@ import { configDefaults } from 'vitest/config'
 export default defineConfig({
   plugins: [react()],
   base: './',
-  build: {
-    outDir: 'dist',
-    assetsDir: 'assets',
-    sourcemap: true,
-    rollupOptions: {
-      output: {
-        manualChunks: undefined
-      }
-    }
-  },
   test: {
     environment: 'jsdom',
     globals: true,
