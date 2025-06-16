@@ -15,3 +15,13 @@
   ```bash
   npm run dev
   ```
+
+## リンター・フォーマッター（Biome）の実行方法
+1. コードの整形
+  ```bash
+  npm run format
+  ```
+2. Lint & Format チェック
+  ```bash
+  npm run check
+  ```
