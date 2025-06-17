@@ -1,10 +1,9 @@
 import react from "@vitejs/plugin-react-swc";
 import { defineConfig } from "vite";
-import biome from "vite-plugin-biome";
 import { configDefaults } from "vitest/config";
 
 export default defineConfig({
-	plugins: [react(), biome({ mode: "check", applyFixes: false })],
+	plugins: [react()],
 	base: "./",
 	test: {
 		environment: "jsdom",
