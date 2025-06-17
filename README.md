@@ -17,11 +17,11 @@
   ```
 
 ## リンター・フォーマッター（Biome）の実行方法
-1. コードの整形
+1. Prettierによるコードのフォーマット:
   ```bash
   npm run format
   ```
-2. Lint & Format チェック
+2. ESLintによるコードの静的解析
   ```bash
-  npm run check
+  npm run lint
   ```

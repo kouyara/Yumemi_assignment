@@ -1,28 +1,49 @@
 import js from "@eslint/js";
-import reactHooks from "eslint-plugin-react-hooks";
-import reactRefresh from "eslint-plugin-react-refresh";
 import globals from "globals";
 import tseslint from "typescript-eslint";
+import reactPlugin from "eslint-plugin-react";
+import reactHooksPlugin from "eslint-plugin-react-hooks";
+import reactRefreshPlugin from "eslint-plugin-react-refresh";
 
 export default tseslint.config(
-	{ ignores: ["dist"] },
+	js.configs.recommended,
+	...tseslint.configs.recommended,
 	{
-		extends: [js.configs.recommended, ...tseslint.configs.recommended],
 		files: ["**/*.{ts,tsx}"],
 		languageOptions: {
-			ecmaVersion: 2020,
-			globals: globals.browser,
+			globals: {
+				...globals.browser,
+				...globals.es2021,
+			},
+			parserOptions: {
+				ecmaVersion: "latest",
+				sourceType: "module",
+				ecmaFeatures: {
+					jsx: true,
+				},
+			},
 		},
 		plugins: {
-			"react-hooks": reactHooks,
-			"react-refresh": reactRefresh,
+			react: reactPlugin,
+			"react-hooks": reactHooksPlugin,
+			"react-refresh": reactRefreshPlugin,
 		},
 		rules: {
-			...reactHooks.configs.recommended.rules,
 			"react-refresh/only-export-components": [
 				"warn",
 				{ allowConstantExport: true },
 			],
 		},
+		settings: {
+			react: {
+				version: "detect",
+			},
+		},
 	},
+	{
+		files: ["src/setupTests.ts"],
+		rules: {
+			"@typescript-eslint/ban-ts-comment": "off",
+		},
+	}
 );
