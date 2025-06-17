@@ -103,17 +103,59 @@ function App() {
         return { name: pref.prefName, data: pop?.data.map((i) => i.value) || [] };
       }),
       tooltip: { valueSuffix: "人" },
+      accessibility: {
+        enabled: false
+      }
     };
   };
 
   return (
-    <>
+    <div className="app">
       <h1>🧡 ゆめみ フロントエンドコーディング試験</h1>
-
+  
       {error && <p className="error">{error}</p>}
+  
+      {selectedPrefectures.length > 0 && prefecturePopulations.length > 0 && (
+        <section className="population-section">
+          <h3>人口推移グラフ</h3>
+  
+          <div className="type-selector">
+            <select
+              className="mobile-select"
+              value={selectedPopulationType}
+              onChange={(e) => setSelectedPopulationType(e.target.value as PopulationType)}
+            >
+              {populationTypes.map((type) => (
+                <option key={type} value={type}>
+                  {type}
+                </option>
+              ))}
+            </select>
 
+            <div className="desktop-radio">
+              {populationTypes.map((type) => (
+                <label key={type}>
+                  <input
+                    type="radio"
+                    name="populationType"
+                    value={type}
+                    checked={selectedPopulationType === type}
+                    onChange={() => setSelectedPopulationType(type)}
+                  />
+                  {type}
+                </label>
+              ))}
+            </div>
+          </div>
+  
+          <div className="chart-container">
+            <HighchartsReact highcharts={Highcharts} options={getChartOptions()} />
+          </div>
+        </section>
+      )}
+  
       {prefectures.length > 0 && (
-        <>
+        <section className="prefectures-section">
           <h2>都道府県一覧</h2>
           <div className="grid-container">
             {prefectures.map((pref) => (
@@ -127,33 +169,10 @@ function App() {
               </label>
             ))}
           </div>
-        </>
+        </section>
       )}
-
-      {selectedPrefectures.length > 0 && prefecturePopulations.length > 0 && (
-        <>
-          <h3>人口推移グラフ</h3>
-          <div className="type-selector">
-            {populationTypes.map((type) => (
-              <label key={type}>
-                <input
-                  type="radio"
-                  name="populationType"
-                  value={type}
-                  checked={selectedPopulationType === type}
-                  onChange={() => setSelectedPopulationType(type)}
-                />
-                {type}
-              </label>
-            ))}
-          </div>
-          <div className="chart-container">
-            <HighchartsReact highcharts={Highcharts} options={getChartOptions()} />
-          </div>
-        </>
-      )}
-    </>
-  );
+    </div>
+  );  
 }
 
 export default App;
