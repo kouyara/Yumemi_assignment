@@ -3,12 +3,7 @@
 都道府県ごとの人口推移をインタラクティブに閲覧できるフロントエンドアプリ  
 公開 URL: <https://kouyara.github.io/Yumemi_assignment/>
 
-- [Tech Stack](#-tech-stack)
-- [Set Up And Run](#-set-up-and-run)
-- [Testing](#-testing)
-- [Linters And Formatters](#-linters-and-formatters)
-
-## Tech Stack
+## 技術スタック
 | Category | Tool / Library | Version (例) |
 | :-- | :-- | :-- |
 | Framework | [React](https://react.dev/) + [Vite](https://vitejs.dev/) | 6.3.5 |
@@ -18,7 +13,7 @@
 | Test | Vitest | |
 | CI | GitHub Actions | |
 
-## Set Up And Run
+## ローカルでの環境構築と実行方法
 1. リポジトリをクローン:
   ```bash
   git clone git@github.com:kouyara/Yumemi_assignment.git
@@ -39,7 +34,7 @@
   npm run dev
   ```
 
-## Testing
+## 単体テスト（Vitest）の実行方法
 1. 全テスト実行
   ```bash
   npm run test
@@ -49,7 +44,7 @@
   npm run test --watch
   ```
 
-## Linters And Formatters
+## リンター・フォーマッターの実行方法
 1. Prettierによるコード整形:
   ```bash
   npm run format
