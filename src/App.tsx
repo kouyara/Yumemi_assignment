@@ -104,21 +104,21 @@ function App() {
       }),
       tooltip: { valueSuffix: "人" },
       accessibility: {
-        enabled: false
-      }
+        enabled: false,
+      },
     };
   };
 
   return (
     <div className="app">
       <h1>🧡 ゆめみ フロントエンドコーディング試験</h1>
-  
+
       {error && <p className="error">{error}</p>}
-  
+
       {selectedPrefectures.length > 0 && prefecturePopulations.length > 0 && (
         <section className="population-section">
           <h3>人口推移グラフ</h3>
-  
+
           <div className="type-selector">
             <select
               className="mobile-select"
@@ -147,13 +147,13 @@ function App() {
               ))}
             </div>
           </div>
-  
+
           <div className="chart-container">
             <HighchartsReact highcharts={Highcharts} options={getChartOptions()} />
           </div>
         </section>
       )}
-  
+
       {prefectures.length > 0 && (
         <section className="prefectures-section">
           <h2>都道府県一覧</h2>
@@ -172,7 +172,7 @@ function App() {
         </section>
       )}
     </div>
-  );  
+  );
 }
 
 export default App;
