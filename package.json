@@ -43,5 +43,6 @@
 	},
 	"lint-staged": {
 		"*.{js,jsx,ts,tsx}": "eslint --fix"
-	}
+	},
+	"packageManager": "node@20.10.0+npm@10.2.3"
 }
