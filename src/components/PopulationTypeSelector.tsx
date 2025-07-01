@@ -14,9 +14,9 @@ const PopulationTypeSelector: React.FC<PopulationTypeSelectorProps> = ({
   selectedPopulationType,
   onChange,
 }) => (
-  <div className={styles["type-selector"]}>
+  <div className={styles["population-type-selector"]}>
     <select
-      className={styles["mobile-select"]}
+      className={styles["population-type-selector__select--mobile"]}
       value={selectedPopulationType}
       onChange={(e) => onChange(e.target.value as PopulationType)}
     >
@@ -26,11 +26,12 @@ const PopulationTypeSelector: React.FC<PopulationTypeSelectorProps> = ({
         </option>
       ))}
     </select>
-    <div className={styles["desktop-radio"]}>
+    <div className={styles["population-type-selector__radio-group--desktop"]}>
       {populationTypes.map((type) => (
-        <label key={type}>
+        <label key={type} className={styles["population-type-selector__label"]}>
           <input
             type="radio"
+            className={styles["population-type-selector__radio"]}
             name="populationType"
             value={type}
             checked={selectedPopulationType === type}

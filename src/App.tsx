@@ -26,15 +26,17 @@ function App() {
 
   return (
     <div className={styles.app}>
-      <h1>🧡 ゆめみ フロントエンドコーディング試験</h1>
+      <h1 className={styles["app__title"]}>
+        🧡 ゆめみ フロントエンドコーディング試験
+      </h1>
 
       {(prefectureError || populationError) && (
-        <p className={styles.error}>{prefectureError || populationError}</p>
+        <p className={styles["app__error"]}>{prefectureError || populationError}</p>
       )}
 
       {selectedPrefectures.length > 0 && prefecturePopulations.length > 0 && (
-        <section className={styles["population-section"]}>
-          <h3>人口推移グラフ</h3>
+        <section className={styles["app__population-section"]}>
+          <h3 className={styles["app__subsubtitle"]}>人口推移グラフ</h3>
           <PopulationTypeSelector
             populationTypes={populationTypes}
             selectedPopulationType={selectedPopulationType}

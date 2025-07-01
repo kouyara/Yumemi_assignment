@@ -33,7 +33,7 @@ const PopulationChart: React.FC<PopulationChartProps> = ({
     accessibility: { enabled: false },
   };
   return (
-    <div className={styles["chart-container"]}>
+    <div className={styles["population-chart__container"]}>
       <HighchartsReact highcharts={Highcharts} options={options} />
     </div>
   );
