@@ -1,5 +1,6 @@
 import React from "react";
 import type { Prefecture } from "../hooks/usePrefectures";
+import styles from "../App.module.css";
 
 interface PrefectureListProps {
   prefectures: Prefecture[];
@@ -12,9 +13,9 @@ const PrefectureList: React.FC<PrefectureListProps> = ({
   selectedPrefectures,
   onChange,
 }) => (
-  <section className="prefectures-section">
+  <section className={styles["prefectures-section"]}>
     <h2>都道府県一覧</h2>
-    <div className="grid-container">
+    <div className={styles["grid-container"]}>
       {prefectures.map((pref) => (
         <label key={pref.prefCode}>
           <input

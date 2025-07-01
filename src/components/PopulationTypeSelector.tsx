@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "../App.module.css";
 
 type PopulationType = "総人口" | "年少人口" | "生産年齢人口" | "老年人口";
 
@@ -13,9 +14,9 @@ const PopulationTypeSelector: React.FC<PopulationTypeSelectorProps> = ({
   selectedPopulationType,
   onChange,
 }) => (
-  <div className="type-selector">
+  <div className={styles["type-selector"]}>
     <select
-      className="mobile-select"
+      className={styles["mobile-select"]}
       value={selectedPopulationType}
       onChange={(e) => onChange(e.target.value as PopulationType)}
     >
@@ -25,7 +26,7 @@ const PopulationTypeSelector: React.FC<PopulationTypeSelectorProps> = ({
         </option>
       ))}
     </select>
-    <div className="desktop-radio">
+    <div className={styles["desktop-radio"]}>
       {populationTypes.map((type) => (
         <label key={type}>
           <input
