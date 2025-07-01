@@ -2,6 +2,7 @@ import React from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import type { PrefecturePopulation } from "../hooks/usePrefecturePopulations";
+import styles from "../App.module.css";
 
 export type PopulationType = "総人口" | "年少人口" | "生産年齢人口" | "老年人口";
 
@@ -32,7 +33,7 @@ const PopulationChart: React.FC<PopulationChartProps> = ({
     accessibility: { enabled: false },
   };
   return (
-    <div className="chart-container">
+    <div className={styles["chart-container"]}>
       <HighchartsReact highcharts={Highcharts} options={options} />
     </div>
   );

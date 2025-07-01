@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./App.css";
+import styles from "./App.module.css";
 import { usePrefectures } from "./hooks/usePrefectures";
 import { usePrefecturePopulations } from "./hooks/usePrefecturePopulations";
 import PrefectureList from "./components/PrefectureList";
@@ -25,15 +25,15 @@ function App() {
     );
 
   return (
-    <div className="app">
+    <div className={styles.app}>
       <h1>🧡 ゆめみ フロントエンドコーディング試験</h1>
 
       {(prefectureError || populationError) && (
-        <p className="error">{prefectureError || populationError}</p>
+        <p className={styles.error}>{prefectureError || populationError}</p>
       )}
 
       {selectedPrefectures.length > 0 && prefecturePopulations.length > 0 && (
-        <section className="population-section">
+        <section className={styles["population-section"]}>
           <h3>人口推移グラフ</h3>
           <PopulationTypeSelector
             populationTypes={populationTypes}
