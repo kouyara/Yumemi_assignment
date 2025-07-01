@@ -13,6 +13,8 @@
 | Category | Tool / Library | Version (例) |
 | :-- | :-- | :-- |
 | Framework | [React](https://react.dev/) + [Vite](https://vitejs.dev/) | 6.3.5 |
+| Framework | Node.js    | 20.10.0 |
+| Framework | npm        | 10.2.3 |
 | Language  | TypeScript | 5.8.3 |
 | Charting  | Highcharts | 12.2.0 |
 | Lint / Format | ESLint, Prettier | |
@@ -31,7 +33,7 @@
   ```
 3. .envファイルの作成:
   プロジェクトのルートディレクトリの下に「.env」ファイルを作成。
-  以下のように設定する。
+  .env.template のテンプレートファイルのように設定する。
   ```
   VITE_API_KEY=api_key
   ```
