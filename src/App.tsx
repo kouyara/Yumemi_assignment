@@ -65,26 +65,20 @@ function App() {
         if (!response.ok) throw new Error("人口データの取得に失敗しました");
         const data = await response.json();
         const prefName = prefectures.find((p) => p.prefCode === prefCode)?.prefName || "";
-        setPrefecturePopulations((prev) => {
-          const newData = [...prev];
-          if (!newData.some((p) => p.prefCode === prefCode)) {
-            newData.push({ prefCode, prefName, data: data.result.data });
-          }
-          return newData;
-        });
+        setPrefecturePopulations((prev) => [
+          ...prev,
+          { prefCode, prefName, data: data.result.data }
+        ]);
       } catch (err) {
         setError(err instanceof Error ? err.message : "エラーが発生しました");
       }
     };
 
     for (const prefCode of selectedPrefectures) {
-      if (!prefecturePopulations.some((p) => p.prefCode === prefCode))
+      if (!prefecturePopulations.some((p) => p.prefCode === prefCode)) {
         fetchPopulationData(prefCode);
+      }
     }
-
-    setPrefecturePopulations((prev) =>
-      prev.filter((pref) => selectedPrefectures.includes(pref.prefCode))
-    );
   }, [selectedPrefectures, prefectures]);
 
   const handlePrefectureChange = (prefCode: number) =>
@@ -93,12 +87,15 @@ function App() {
     );
 
   const getChartOptions = () => {
-    const years = prefecturePopulations[0]?.data[0]?.data.map((item) => item.year) || [];
+    const filteredPopulations = prefecturePopulations.filter((pref) =>
+      selectedPrefectures.includes(pref.prefCode)
+    );
+    const years = filteredPopulations[0]?.data[0]?.data.map((item) => item.year) || [];
     return {
       title: { text: `${selectedPopulationType}の推移` },
       xAxis: { title: { text: "年" }, categories: years },
       yAxis: { title: { text: "人口" } },
-      series: prefecturePopulations.map((pref) => {
+      series: filteredPopulations.map((pref) => {
         const pop = pref.data.find((d) => d.label === selectedPopulationType);
         return { name: pref.prefName, data: pop?.data.map((i) => i.value) || [] };
       }),
