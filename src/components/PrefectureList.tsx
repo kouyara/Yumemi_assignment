@@ -13,13 +13,14 @@ const PrefectureList: React.FC<PrefectureListProps> = ({
   selectedPrefectures,
   onChange,
 }) => (
-  <section className={styles["prefectures-section"]}>
-    <h2>都道府県一覧</h2>
-    <div className={styles["grid-container"]}>
+  <section className={styles["app__prefectures-section"]}>
+    <h2 className={styles["app__subtitle"]}>都道府県一覧</h2>
+    <div className={styles["prefecture-list"]}>
       {prefectures.map((pref) => (
-        <label key={pref.prefCode}>
+        <label key={pref.prefCode} className={styles["prefecture-list__label"]}>
           <input
             type="checkbox"
+            className={styles["prefecture-list__checkbox"]}
             checked={selectedPrefectures.includes(pref.prefCode)}
             onChange={() => onChange(pref.prefCode)}
           />

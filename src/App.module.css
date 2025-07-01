@@ -24,25 +24,25 @@ body {
 	flex-direction: column;
 }
 
-.population-section   { order: 2; }
-.prefectures-section  { order: 3; }
+.app__population-section   { order: 2; }
+.app__prefectures-section  { order: 3; }
 
-h1 {
+.app__title {
 	text-align: center;
 	color: var(--green-900);
 	font-size: 1.5rem;
 	margin: 0 0 1.5rem;
 }
 
-h2,
-h3 {
+.app__subtitle,
+.app__subsubtitle {
 	text-align: center;
 	color: var(--green-800);
 	margin: 1rem 0 0.75rem;
 	font-size: 1.2rem;
 }
 
-.error {
+.app__error {
 	max-width: 600px;
 	margin: 1rem auto;
 	padding: 0.75rem 1.25rem;
@@ -53,7 +53,7 @@ h3 {
 	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
 }
 
-label {
+.prefecture-list__label {
 	display: flex;
 	align-items: center;
 	gap: 5px;
@@ -66,12 +66,12 @@ label {
 	user-select: none;
 }
 
-label:hover {
+.prefecture-list__label:hover {
 	background: var(--green-100);
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-input[type="checkbox"] {
+.prefecture-list__checkbox {
 	appearance: none;
 	-webkit-appearance: none;
 	width: 18px;
@@ -84,12 +84,12 @@ input[type="checkbox"] {
 	transition: background 0.2s ease, box-shadow 0.2s ease;
 }
 
-input[type="checkbox"]:checked {
+.prefecture-list__checkbox:checked {
 	background: var(--green-600);
 	box-shadow: 0 0 0 2px var(--green-600);
 }
 
-input[type="checkbox"]:checked::after {
+.prefecture-list__checkbox:checked::after {
 	content: "";
 	width: 6px;
 	height: 12px;
@@ -98,29 +98,29 @@ input[type="checkbox"]:checked::after {
 	transform: rotate(45deg);
 }
 
-input[type="checkbox"]:focus-visible {
+.prefecture-list__checkbox:focus-visible {
 	outline: 2px solid var(--green-700);
 	outline-offset: 2px;
 }
 
-input[type="radio"] {
+.population-type-selector__radio {
 	accent-color: var(--green-600);
 	width: 18px;
 	height: 18px;
 }
 
-input[type="radio"]:focus-visible {
+.population-type-selector__radio:focus-visible {
 	outline: 2px solid var(--green-600);
 	outline-offset: 2px;
 }
 
-.grid-container {
+.prefecture-list {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
 	gap: 8px;
 }
 
-.type-selector {
+.population-type-selector {
 	margin-bottom: 20px;
 	display: flex;
 	flex-direction: column;
@@ -128,7 +128,7 @@ input[type="radio"]:focus-visible {
 	align-items: center;
 }
 
-.mobile-select {
+.population-type-selector__select--mobile {
 	width: 100%;
 	max-width: 300px;
 	padding: 0.6rem 0.9rem;
@@ -145,23 +145,23 @@ input[type="radio"]:focus-visible {
 	background-position: right 0.9rem center;
 }
 
-.mobile-select:focus {
+.population-type-selector__select--mobile:focus {
 	outline: 2px solid var(--green-600);
 	outline-offset: 2px;
 }
 
-.desktop-radio {
+.population-type-selector__radio-group--desktop {
 	display: none;
 }
 
-.type-selector label {
+.population-type-selector__label {
 	width: 100%;
 	max-width: 300px;
 	justify-content: center;
 	font-size: 0.9rem;
 }
 
-.chart-container {
+.population-chart__container {
 	width: 100%;
 	max-width: 100%;
 	margin: 0 auto;
@@ -190,48 +190,48 @@ input[type="radio"]:focus-visible {
 		padding: 3rem 2rem;
 	}
 
-	h1 {
+	.app__title {
 		font-size: 2rem;
 		margin: 0 0 2rem;
 	}
 
-	h2,
-	h3 {
+	.app__subtitle,
+	.app__subsubtitle {
 		font-size: 1.5rem;
 		margin: 1.5rem 0 1rem;
 	}
 
-	.grid-container {
+	.prefecture-list {
 		grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
 		gap: 10px;
 	}
 
-	.chart-container {
+	.population-chart__container {
 		max-width: 800px;
 		padding: 0;
 	}
 
-	.prefectures-section { order: 2; }
-	.population-section  { order: 3; }
+	.app__prefectures-section { order: 2; }
+	.app__population-section  { order: 3; }
 
-	.type-selector {
+	.population-type-selector {
 		flex-direction: row;
 		gap: 20px;
 		justify-content: center;
 		width: 100%;
 	}
 
-	.type-selector label {
+	.population-type-selector__label {
 		width: auto;
 		max-width: none;
 		font-size: 1rem;
 	}
 
-	.mobile-select {
+	.population-type-selector__select--mobile {
 		display: none;
 	}
 
-	.desktop-radio {
+	.population-type-selector__radio-group--desktop {
 		display: flex;
 		flex-direction: row;
 		gap: 20px;
@@ -239,7 +239,7 @@ input[type="radio"]:focus-visible {
 		width: 100%;
 	}
 
-	.desktop-radio label {
+	.population-type-selector__radio-group--desktop .population-type-selector__label {
 		width: auto;
 		max-width: none;
 		font-size: 1rem;
